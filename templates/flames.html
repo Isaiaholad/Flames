@@ -1,0 +1,80 @@
+<!-- flames.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fames</title>
+</head>
+<body>
+  <center>
+    <h1><b><i>FLAMes</h1>
+  <div id="app">
+    <input type="text" id="input1" placeholder="Enter name 1">
+    <input type="text" id="input2" placeholder="Enter name 2">
+    <button onclick="calculateStatus()">Check Status</button>
+    <ul id="statusList"></ul>
+  </div>
+</center>
+  <script>
+    function calculateStatus() {
+      var input1 = document.getElementById("input1").value;
+      var input2 = document.getElementById("input2").value;
+      var statusList = document.getElementById("statusList");
+
+      if (input1 === "" || input2 === "") {
+        statusList.innerHTML = "<li>No entry</li>";
+      } else {
+        var status = getStatus(input1, input2);
+        statusList.innerHTML = "<li>" + input1 + " and " + input2 + " are " + status + "</li>";
+      }
+    }
+
+    function getStatus(name1, name2) {
+      var combinedNames = getCombinedNames(name1, name2);
+      var status = "";
+
+      switch (combinedNames.length % 6) {
+        case 0:
+          status = "SECRET LOVERS";
+          break;
+        case 5:
+        case 1:
+          status = "ENEMIES";
+          break;
+        case 4:
+        case 2:
+          status = "MARRIAGE";
+          break;
+        case 3:
+          status = "ADMIRES";
+          break;
+        default:
+          status = "LOVERS";
+          break;
+      }
+
+      return status;
+    }
+
+    function getCombinedNames(name1, name2) {
+      var combinedNames = "";
+
+      for (var i = 0; i < name1.length; i++) {
+        if (!name2.includes(name1[i])) {
+          combinedNames += name1[i];
+        }
+      }
+
+      for (var j = 0; j < name2.length; j++) {
+        if (!name1.includes(name2[j])) {
+          combinedNames += name2[j];
+        }
+      }
+
+      return combinedNames;
+    }
+  </script>
+</body>
+</html>
